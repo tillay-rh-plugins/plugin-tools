@@ -57,4 +57,6 @@ EOF
 echo "# $pname
 ### $desc" > "$pname/README.md"
 
+chmod +x $pname/gradlew
+
 echo -e "\nAll done! Project folder created at ./$pname.\nPlugin java file is at ./$mainfile"
