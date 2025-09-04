@@ -57,4 +57,4 @@ EOF
 echo "# $pname
 ### $desc" > "$pname/README.md"
 
-echo -e "\nAll done! Project folder created at ./$pname"
+echo -e "\nAll done! Project folder created at ./$pname.\nPlugin java file is at ./$mainfile"
