@@ -46,6 +46,7 @@ public class $classbase extends Plugin {
 	@Override
 	public void onLoad() {
 		this.getLogger().info("loaded $pname");
+		RusherHackAPI.getThingManager().registerFeature(new ClassThingy());
 	}
 	@Override
 	public void onUnload() {
@@ -58,5 +59,8 @@ echo "# $pname
 ### $desc" > "$pname/README.md"
 
 chmod +x $pname/gradlew
+
+mkdir -p $pname/.github/workflows
+wget https://raw.githubusercontent.com/tillay-rh-plugins/plugin-tools/refs/heads/main/release.yml -O $pname/.github/workflows/release.yml
 
 echo -e "\nAll done! Project folder created at ./$pname.\nPlugin java file is at ./$mainfile"
