@@ -35,6 +35,9 @@ jobs:
           plugin_name=$(grep '^plugin_name' gradle.properties | cut -d'=' -f2 | xargs)
           echo "plugin_name=$plugin_name" >> $GITHUB_ENV
 
+      - name: Set commit hash
+        run: echo "commit_hash=$(git rev-parse --short=6 HEAD)" >> $GITHUB_ENV
+
       - name: Get Latest Tag
         id: get_latest_tag
         uses: actions-ecosystem/action-get-latest-tag@v1
@@ -71,7 +74,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ env.version }}-${{ github.sha }}
+          tag_name: v${{ env.version }}-${{ env.commit_hash }}
           release_name: ${{ github.repository }} for ${{ env.minecraft_versions }}
           body: |
             full changes: [view commit(s)](${{ env.compare_url }})
