@@ -20,7 +20,7 @@ mkdir -p "$pname/src/main/java/$uname/$pack"
 
 json="$pname/src/main/resources/rusherhack-plugin.json"
 url=""
-classbase=$(echo "$pname" | sed -E 's/(^|-)([a-z])/\U\2/g')
+classbase="Plugin"
 mcjson=$(echo "$mcvers" | tr ', ' '\n' | awk NF | sed 's/^/"/;s/$/"/' | paste -sd, -)
 
 jq --arg name "$uname" \
@@ -61,6 +61,6 @@ echo "# $pname
 chmod +x $pname/gradlew
 
 mkdir -p $pname/.github/workflows
-wget https://raw.githubusercontent.com/tillay-rh-plugins/plugin-tools/refs/heads/main/release.yml -O $pname/.github/workflows/release.yml
+wget -q https://raw.githubusercontent.com/tillay-rh-plugins/plugin-tools/refs/heads/main/release.yml -O $pname/.github/workflows/release.yml
 
 echo -e "\nAll done! Project folder created at ./$pname.\nPlugin java file is at ./$mainfile"
