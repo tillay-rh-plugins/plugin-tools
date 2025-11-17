@@ -20,7 +20,7 @@ mkdir -p "$pname/src/main/java/$uname/$pack"
 
 json="$pname/src/main/resources/rusherhack-plugin.json"
 url=""
-classbase="Plugin"
+classbase="PluginMain"
 mcjson=$(echo "$mcvers" | tr ', ' '\n' | awk NF | sed 's/^/"/;s/$/"/' | paste -sd, -)
 
 jq --arg name "$uname" \
