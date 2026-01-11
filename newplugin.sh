@@ -1,17 +1,17 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-read -p "Plugin name: " pname
-read -p "Supported minecraft versions: " mcvers
-read -p "Who are you: " uname
-read -p "Description: " desc
-read -p "Package name: " pack
+read -rp "Plugin name: " pname
+read -rp "Supported minecraft versions: " mcvers
+read -rp "Who are you: " uname
+read -rp "Description: " desc
+read -rp "Package name: " pack
 
 git clone https://github.com/john200410/example-plugin "$pname" -q
 
 sed -i "s/^plugin_name =.*/plugin_name = $pname/" "$pname/gradle.properties"
 sed -i "s/^java_version =.*/java_version = 21/" "$pname/gradle.properties"
 
-mcfirst=$(echo "$mcvers" | sed 's/[ ,].*//')
+mcfirst=${mcvers%%[ ,]*}
 sed -i "s/^minecraft_version =.*/minecraft_version = $mcfirst/" "$pname/gradle.properties"
 
 rm -rf "$pname/src/main/java/org" "$pname/src/main/resources/exampleplugin" "$pname/.git" "$pname/LICENSE"
@@ -58,9 +58,9 @@ EOF
 echo "# $pname
 ### $desc" > "$pname/README.md"
 
-chmod +x $pname/gradlew
+chmod +x "$pname"/gradlew
 
-mkdir -p $pname/.github/workflows
-wget -q https://raw.githubusercontent.com/tillay-rh-plugins/plugin-tools/refs/heads/main/release.yml -O $pname/.github/workflows/release.yml
+mkdir -p "$pname"/.github/workflows
+wget -q https://raw.githubusercontent.com/tillay-rh-plugins/plugin-tools/refs/heads/main/release.yml -O "$pname"/.github/workflows/release.yml
 
 echo -e "\nAll done! Project folder created at ./$pname.\nPlugin java file is at ./$mainfile"
